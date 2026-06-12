@@ -51,7 +51,7 @@ To build and run the example applications, you need:
 
 #### Running the Demos
 
-You can run any of the demos using the provided `Makefile` targets:
+You can run any of the demos using the provided [`Makefile`](Makefile) targets:
 
 - Run the GraphRAG pipeline:
   ```bash
