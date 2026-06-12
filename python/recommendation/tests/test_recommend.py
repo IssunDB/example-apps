@@ -7,9 +7,8 @@ from __future__ import annotations
 
 import gc
 import json
-from pathlib import Path
-
 import pytest
+from pathlib import Path
 
 issundb = pytest.importorskip("issundb")
 

@@ -5,9 +5,8 @@ These tests skip cleanly while the ``issundb`` package is not installed.
 
 from __future__ import annotations
 
-from pathlib import Path
-
 import pytest
+from pathlib import Path
 
 issundb = pytest.importorskip("issundb")
 

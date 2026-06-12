@@ -1,0 +1,68 @@
+digraph FraudDetection {
+    fontname = "Helvetica,Arial,sans-serif"
+    layout = dot
+    rankdir = TB
+    ranksep = 0.5
+    nodesep = 0.4
+    splines = true
+    bgcolor = "white"
+
+    node [
+    fontname = "Helvetica,Arial,sans-serif",
+    shape = rect,
+    style = "filled",
+    color = "#475569",
+    fillcolor = "white",
+    penwidth = 1.4,
+    margin = "0.16,0.10"
+    ]
+
+    edge [
+    fontname = "Helvetica,Arial,sans-serif",
+    fontsize = 10,
+    color = "#475569",
+    fontcolor = "#475569",
+    penwidth = 1.2
+    ]
+
+    // Nodes
+    generator [label = "Stream Generator\n(accounts & registrations)", fillcolor = "#DBEAFE", color = "#2563EB"]
+
+    subgraph cluster_ingestion {
+    label = "1. Transaction Ingestion"
+    style = "rounded"
+    color = "#2563EB"
+    fillcolor = "#F8FAFC"
+    penwidth = 1.4
+    margin = 12
+
+    parse_evt [label = "Parse Stream Event", fillcolor = "#F1F5F9"]
+    graph_insert [label = "Insert Nodes & Edges\n(IssunDB)", fillcolor = "#DBEAFE", color = "#2563EB"]
+    }
+
+    subgraph cluster_detection {
+    label = "2. Real-Time Detection"
+    style = "rounded"
+    color = "#D97706"
+    fillcolor = "#F8FAFC"
+    penwidth = 1.4
+    margin = 12
+
+    cypher_queries [label = "Execute Cypher Queries\n(concurrent checks)", fillcolor = "#FEF3C7", color = "#D97706"]
+    shared_devices [label = "Shared Device Detection", fillcolor = "#F1F5F9"]
+    circular_transfers [label = "Circular Transfer Rings", fillcolor = "#F1F5F9"]
+    }
+
+    alerts [label = "Fraud Alerts\n(suspicious entities marked)", fillcolor = "#FEE2E2", color = "#EF4444"]
+
+    // Edges
+    generator -> parse_evt
+    parse_evt -> graph_insert
+
+    graph_insert -> cypher_queries
+    cypher_queries -> shared_devices
+    cypher_queries -> circular_transfers
+
+    shared_devices -> alerts
+    circular_transfers -> alerts
+}

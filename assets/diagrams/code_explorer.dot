@@ -1,0 +1,82 @@
+digraph CodebaseExplorer {
+    fontname = "Helvetica,Arial,sans-serif"
+    layout = dot
+    rankdir = TB
+    ranksep = 0.5
+    nodesep = 0.4
+    splines = true
+    bgcolor = "white"
+
+    node [
+    fontname = "Helvetica,Arial,sans-serif",
+    shape = rect,
+    style = "filled",
+    color = "#475569",
+    fillcolor = "white",
+    penwidth = 1.4,
+    margin = "0.16,0.10"
+    ]
+
+    edge [
+    fontname = "Helvetica,Arial,sans-serif",
+    fontsize = 10,
+    color = "#475569",
+    fontcolor = "#475569",
+    penwidth = 1.2
+    ]
+
+    // Nodes
+    sources [label = "Rust Source Files\n(.rs)", fillcolor = "#DBEAFE", color = "#2563EB"]
+
+    subgraph cluster_parsing {
+    label = "1. Parse & Analyze"
+    style = "rounded"
+    color = "#2563EB"
+    fillcolor = "#F8FAFC"
+    penwidth = 1.4
+    margin = 12
+
+    syn_parse [label = "syn AST Parsing", fillcolor = "#F1F5F9"]
+    extract_defs [label = "Extract Definitions\n(modules, functions, structs)", fillcolor = "#F1F5F9"]
+    extract_deps [label = "Extract Dependencies\n(calls, imports, definitions)", fillcolor = "#F1F5F9"]
+    }
+
+    subgraph cluster_storage {
+    label = "2. Graph Storage"
+    style = "rounded"
+    color = "#7C3AED"
+    fillcolor = "#F8FAFC"
+    penwidth = 1.4
+    margin = 12
+
+    db_nodes [label = "Store Nodes\n(labeled AST elements)", fillcolor = "#F3E8FF", color = "#7C3AED"]
+    db_edges [label = "Store Edges\n(typed relations)", fillcolor = "#F3E8FF", color = "#7C3AED"]
+    db_csr [label = "Build CSR Matrix\n(in-memory adjacency)", fillcolor = "#F3E8FF", color = "#7C3AED"]
+    }
+
+    subgraph cluster_ranking {
+    label = "3. Analysis & Ranking"
+    style = "rounded"
+    color = "#16A34A"
+    fillcolor = "#F8FAFC"
+    penwidth = 1.4
+    margin = 12
+
+    pagerank [label = "PageRank Solver", fillcolor = "#F1F5F9"]
+    rankings [label = "Ranked Functions\n(top critical symbols)", fillcolor = "#DCFCE7", color = "#16A34A"]
+    }
+
+    // Edges
+    sources -> syn_parse
+    syn_parse -> extract_defs
+    syn_parse -> extract_deps
+
+    extract_defs -> db_nodes
+    extract_deps -> db_edges
+
+    db_nodes -> db_csr
+    db_edges -> db_csr
+
+    db_csr -> pagerank
+    pagerank -> rankings
+}

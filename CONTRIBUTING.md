@@ -32,7 +32,7 @@ it has already been resolved.
 
 The repository is organized around four showcase applications:
 
-1. `rust/graphrag-agent`: Graph RAG application showcasing vector search, full-text search, and hybrid graph expansion.
+1. `rust/graphrag-agent`: GraphRAG application showcasing vector search, full-text search, and hybrid graph expansion.
 2. `rust/code-explorer`: Rust source code navigator illustrating structural graph analysis (PageRank, components, shortest path) on code syntax trees.
 3. `python/fraud`: Cypher-based fraud pattern detection over a simulated transaction stream.
 4. `python/recommendation`: Hybrid friend-of-friend and content recommendation system.

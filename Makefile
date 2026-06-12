@@ -82,3 +82,7 @@ setup-hooks: ## Install Git hooks (pre-commit and pre-push)
 test-hooks: ## Test Git hooks on all files
 	@echo "Testing Git hooks..."
 	@pre-commit run --all-files
+
+.PHONY: shell
+shell: ## Enter the Nix development shell environment
+	@nix develop

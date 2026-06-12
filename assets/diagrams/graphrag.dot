@@ -1,0 +1,81 @@
+digraph GraphRAGPipeline {
+    fontname = "Helvetica,Arial,sans-serif"
+    layout = dot
+    rankdir = TB
+    ranksep = 0.5
+    nodesep = 0.4
+    splines = true
+    bgcolor = "white"
+
+    node [
+    fontname = "Helvetica,Arial,sans-serif",
+    shape = rect,
+    style = "filled",
+    color = "#475569",
+    fillcolor = "white",
+    penwidth = 1.4,
+    margin = "0.16,0.10"
+    ]
+
+    edge [
+    fontname = "Helvetica,Arial,sans-serif",
+    fontsize = 10,
+    color = "#475569",
+    fontcolor = "#475569",
+    penwidth = 1.2
+    ]
+
+    // Nodes
+    subgraph cluster_ingest {
+    label = "1. Ingestion Phase"
+    style = "rounded"
+    color = "#2563EB"
+    fillcolor = "#F8FAFC"
+    penwidth = 1.4
+    margin = 12
+
+    docs [label = "Source Documents\n(.md, .txt)", fillcolor = "#DBEAFE", color = "#2563EB"]
+    chunks [label = "Text Chunking\n(Target ~400 char)", fillcolor = "#F1F5F9"]
+    ner [label = "Entity Extraction\n(Capitalized word runs)", fillcolor = "#F1F5F9"]
+    write_db [label = "IssunDB Storage\n(Nodes & Edges)", fillcolor = "#DBEAFE", color = "#2563EB"]
+    vector_index [label = "Vector Indexing", fillcolor = "#F1F5F9"]
+    text_index [label = "Full-Text Indexing", fillcolor = "#F1F5F9"]
+    }
+
+    subgraph cluster_ask {
+    label = "2. Query & Retrieval Phase"
+    style = "rounded"
+    color = "#16A34A"
+    fillcolor = "#F8FAFC"
+    penwidth = 1.4
+    margin = 12
+
+    query [label = "User Query", fillcolor = "#DCFCE7", color = "#16A34A"]
+    embed_q [label = "Question Embedding", fillcolor = "#F1F5F9"]
+    hybrid_search [label = "Hybrid Search\n(Vector + BM25)", fillcolor = "#F1F5F9"]
+    rrf [label = "Reciprocal-Rank Fusion", fillcolor = "#F1F5F9"]
+    graph_expand [label = "Graph Expansion\n(Adj. Entities & Docs)", fillcolor = "#F1F5F9"]
+    prompt [label = "Context Construction", fillcolor = "#F1F5F9"]
+    llm [label = "LLM Generation\n(openai/gpt-5.4-mini)", fillcolor = "#DCFCE7", color = "#16A34A"]
+    answer [label = "Grounded Answer", fillcolor = "#DCFCE7", color = "#16A34A"]
+    }
+
+    // Ingestion Flow
+    docs -> chunks
+    chunks -> ner
+    ner -> write_db
+    write_db -> vector_index
+    write_db -> text_index
+
+    // Query Flow
+    query -> embed_q
+    embed_q -> hybrid_search
+    query -> hybrid_search [label = " raw text"]
+    vector_index -> hybrid_search [style = "dashed", arrowhead = "none"]
+    text_index -> hybrid_search [style = "dashed", arrowhead = "none"]
+    hybrid_search -> rrf
+    rrf -> graph_expand
+    graph_expand -> prompt
+    prompt -> llm
+    llm -> answer
+}

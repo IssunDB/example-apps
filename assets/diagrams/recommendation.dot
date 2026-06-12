@@ -1,0 +1,69 @@
+digraph SocialRecommendation {
+    fontname = "Helvetica,Arial,sans-serif"
+    layout = dot
+    rankdir = TB
+    ranksep = 0.5
+    nodesep = 0.4
+    splines = true
+    bgcolor = "white"
+
+    node [
+    fontname = "Helvetica,Arial,sans-serif",
+    shape = rect,
+    style = "filled",
+    color = "#475569",
+    fillcolor = "white",
+    penwidth = 1.4,
+    margin = "0.16,0.10"
+    ]
+
+    edge [
+    fontname = "Helvetica,Arial,sans-serif",
+    fontsize = 10,
+    color = "#475569",
+    fontcolor = "#475569",
+    penwidth = 1.2
+    ]
+
+    // Nodes
+    data_sources [label = "Seed Data\n(users, posts, tags)", fillcolor = "#DBEAFE", color = "#2563EB"]
+
+    subgraph cluster_seeding {
+    label = "1. Graph & Vector Seeding"
+    style = "rounded"
+    color = "#2563EB"
+    fillcolor = "#F8FAFC"
+    penwidth = 1.4
+    margin = 12
+
+    embed_gen [label = "Text Embeddings\n(interests & posts)", fillcolor = "#F1F5F9"]
+    graph_populate [label = "Populate Graph Nodes\n& Vector Properties", fillcolor = "#DBEAFE", color = "#2563EB"]
+    }
+
+    subgraph cluster_recommendation {
+    label = "2. Hybrid Recommendation Engine"
+    style = "rounded"
+    color = "#16A34A"
+    fillcolor = "#F8FAFC"
+    penwidth = 1.4
+    margin = 12
+
+    collaborative [label = "Graph Collaborative Filtering\n(friend-of-a-friend traversal)", fillcolor = "#F1F5F9"]
+    semantic [label = "Semantic Retrieval\n(vector search)", fillcolor = "#F1F5F9"]
+    hybrid_fuse [label = "Hybrid Fusion & Scoring", fillcolor = "#F1F5F9"]
+    }
+
+    outputs [label = "Recommended Friends\n& Relevant Articles", fillcolor = "#DCFCE7", color = "#16A34A"]
+
+    // Edges
+    data_sources -> embed_gen
+    embed_gen -> graph_populate
+
+    graph_populate -> collaborative [label = " graph traversal"]
+    graph_populate -> semantic [label = " vector queries"]
+
+    collaborative -> hybrid_fuse
+    semantic -> hybrid_fuse
+
+    hybrid_fuse -> outputs
+}

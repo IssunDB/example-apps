@@ -1,10 +1,10 @@
-//! GraphRAG agent built on IssunDB.
+//! GraphRAG pipeline built on IssunDB.
 //!
 //! Showcases hybrid retrieval: vector search and BM25 text search fused with
 //! reciprocal-rank fusion, then expanded through graph structure so the
 //! answer context includes related chunks and entities that pure vector
-//! similarity would miss. Works fully offline; set `ANTHROPIC_API_KEY` to
-//! have Claude generate the final answer from the retrieved context.
+//! similarity would miss. Works fully offline; set `OPENROUTER_API_KEY` to
+//! have the model generate the final answer from the retrieved context.
 
 mod embed;
 mod ingest;
@@ -21,7 +21,7 @@ use issundb::{
 };
 
 #[derive(Parser)]
-#[command(about = "GraphRAG agent: hybrid (vector + text + graph) retrieval over documents")]
+#[command(about = "GraphRAG pipeline: hybrid (vector + text + graph) retrieval over documents")]
 struct Cli {
     /// Path to the IssunDB database directory.
     #[arg(long, default_value = "./rag-data")]
@@ -139,8 +139,8 @@ fn ask(graph: &Graph, question: &str, k: usize, hops: u8, show_context: bool) ->
         }
     }
     match answer {
-        Some(text) => println!("=== Answer (Claude) ===\n\n{text}"),
-        None => println!("(Set ANTHROPIC_API_KEY to generate an answer from this context.)"),
+        Some(text) => println!("=== Answer ===\n\n{text}"),
+        None => println!("(Set OPENROUTER_API_KEY to generate an answer from this context.)"),
     }
     Ok(())
 }

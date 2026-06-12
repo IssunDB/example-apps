@@ -36,6 +36,7 @@
               cmake
               gcc
               pkg-config
+              graphviz
             ];
 
             shellHook = ''
@@ -44,6 +45,7 @@
               echo "uv: $(uv --version 2>/dev/null || echo 'not found')"
               echo "cargo: $(cargo --version 2>/dev/null || echo 'not found')"
               echo "cmake: $(cmake --version 2>/dev/null || echo 'not found')"
+              echo "graphviz: $(dot -V 2>&1 || echo 'not found')"
             '';
           };
         });

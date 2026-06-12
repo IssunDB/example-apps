@@ -30,7 +30,7 @@ Priorities, in order:
 
 ## Repository Layout
 
-- `rust/graphrag-agent/`: Graph RAG application in Rust.
+- `rust/graphrag-agent/`: GraphRAG application in Rust.
 - `rust/code-explorer/`: Rust source code navigator and structural analyzer using PageRank.
 - `python/fraud/`: Cypher-based fraud pattern detection over transaction stream.
 - `python/recommendation/`: Hybrid user friend and content recommendation system.
