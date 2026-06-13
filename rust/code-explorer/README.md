@@ -5,8 +5,10 @@ This example indexes Rust source code, builds a syntax dependency graph, and ran
 ### How It Works
 
 1. Parses Rust source files into abstract syntax trees (using the `syn` library).
-2. Stores syntax elements (like modules, functions, and structs) as nodes, and dependencies (like calls, imports, and definitions) as edges in IssunDB.
-3. Computes the structural importance of functions using the PageRank algorithm on the constructed graph.
+2. Stores files, functions, structs, enums, and traits as nodes, with `CONTAINS`, `CALLS`, `METHOD_OF`, and `IMPLEMENTS` edges between them.
+3. Answers structural questions over the graph, including callers and callees through Cypher, dead-code candidates, transitive impact through native
+   adjacency traversal, the shortest call path between two functions, weakly connected components, and cycle detection.
+4. Ranks functions by structural importance with PageRank over the code graph.
 
 More detailed workflow is shown below:
 
