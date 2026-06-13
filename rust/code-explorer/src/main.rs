@@ -38,12 +38,12 @@ enum Command {
     Dead,
     /// Everything transitively affected if this function changes.
     Impact { name: String },
-    /// Most structurally important functions (PageRank over the call graph).
+    /// Most structurally important functions (PageRank over the code graph).
     Rank {
         #[arg(long, default_value_t = 15)]
         top: usize,
     },
-    /// Connected components and recursion cycles in the call graph.
+    /// Connected components and reference cycles across the code graph.
     Structure,
     /// Shortest call path between two functions.
     Path { from: String, to: String },
@@ -176,6 +176,9 @@ fn impact(graph: &Graph, name: &str) -> Result<()> {
 }
 
 fn rank(graph: &Graph, top: usize) -> Result<()> {
+    // PageRank runs over every edge type (CALLS, CONTAINS, METHOD_OF,
+    // IMPLEMENTS), so the score is whole-code-graph centrality, not pure
+    // call-graph importance; we then keep only the Function nodes.
     let scores = graph.page_rank(30, 0.85)?;
     let functions = graph.nodes_by_label("Function")?;
     let mut ranked: Vec<(NodeId, f32)> = functions
@@ -184,7 +187,7 @@ fn rank(graph: &Graph, top: usize) -> Result<()> {
         .collect();
     ranked.sort_by(|a, b| b.1.total_cmp(&a.1));
 
-    println!("most depended-upon functions (PageRank over the call graph):");
+    println!("most central functions (PageRank over the code graph):");
     for (node, score) in ranked.into_iter().take(top) {
         println!(
             "  {score:.5}  {:<36} {}",
@@ -208,8 +211,10 @@ fn structure(graph: &Graph) -> Result<()> {
         sizes.len(),
         &sizes[..sizes.len().min(8)]
     );
+    // detect_cycle spans all edge types; in this schema a cycle is almost
+    // always CALLS recursion, but it is not restricted to it.
     println!(
-        "recursion present: {}",
+        "cycle present: {}",
         if graph.detect_cycle()? { "yes" } else { "no" }
     );
     Ok(())

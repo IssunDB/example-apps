@@ -101,11 +101,15 @@ def main(argv: list[str] | None = None) -> int:
         if not batch:
             break
         batch_no += 1
+        batch_first_ts = batch[0].ts
         for event in batch:
             store.apply(event)
             last_ts = max(last_ts, event.ts)
 
-        since_ts = last_ts - args.window
+        # Look back `window` seconds, but never start later than the oldest
+        # event in this batch: a batch whose span exceeds the window would
+        # otherwise drop patterns injected early in it before they are scored.
+        since_ts = min(last_ts - args.window, batch_first_ts)
         new_alerts: list[Alert] = []
         for alert in run_all_detectors(db, since_ts):
             key = (alert.rule, alert.subject)
