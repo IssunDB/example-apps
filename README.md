@@ -13,12 +13,12 @@ This repository includes a collection of example applications that use the [Issu
 
 Currently, the following table lists the included examples:
 
-| # | Example                                               | Language | Description                                                                              |
-|---|-------------------------------------------------------|----------|------------------------------------------------------------------------------------------|
-| 1 | [GraphRAG Pipeline](rust/graphrag-agent)              | Rust     | Knowledge graph extraction and retrieval-augmented generation using an LLM.              |
-| 2 | [Codebase Explorer](rust/code-explorer)               | Rust     | Syntax dependency graph constructor and function ranking using PageRank.                 |
-| 3 | [Fraud Detection System](python/fraud)                | Python   | Real-time financial transaction stream analyzer using Cypher queries.                    |
-| 4 | [Social Recommendation System](python/recommendation) | Python   | Hybrid friend and content recommender using collaborative filtering and semantic search. |
+| # | Example                                               | Language | Description                                                                                       |
+|---|-------------------------------------------------------|----------|---------------------------------------------------------------------------------------------------|
+| 1 | [GraphRAG Pipeline](rust/graphrag-agent)              | Rust     | Knowledge graph extraction and retrieval-augmented generation using an LLM.                       |
+| 2 | [Codebase Explorer](rust/code-explorer)               | Rust     | Syntax dependency graph constructor and function ranking using PageRank.                          |
+| 3 | [Fraud Detection System](python/fraud)                | Python   | Real-time financial transaction stream analyzer using Cypher queries.                             |
+| 4 | [Social Recommendation System](python/recommendation) | Python   | Hybrid friend and content recommender using graph traversal, vector search, and hybrid retrieval. |
 
 ---
 
