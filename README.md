@@ -3,7 +3,7 @@
 [![Tests](https://img.shields.io/github/actions/workflow/status/IssunDB/example-apps/tests.yml?label=tests&style=flat&labelColor=282c34&logo=github)](https://github.com/IssunDB/example-apps/actions/workflows/tests.yml)
 [![Code Coverage](https://img.shields.io/codecov/c/github/IssunDB/example-apps?label=coverage&style=flat&labelColor=282c34&logo=codecov)](https://codecov.io/gh/IssunDB/example-apps)
 [![Python version](https://img.shields.io/badge/python-%3E=3.10-3776ab?style=flat&labelColor=282c34&logo=python)](https://github.com/IssunDB/example-apps)
-[![License: MIT](https://img.shields.io/badge/license-MIT-ffd343?style=flat&labelColor=282c34&logo=open-source-initiative)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/license-MIT-3776ab?style=flat&labelColor=282c34&logo=open-source-initiative)](LICENSE)
 
 This repository includes a collection of example applications that use the [IssunDB](https://github.com/IssunDB/issun-db) graph database.
 
@@ -13,12 +13,12 @@ This repository includes a collection of example applications that use the [Issu
 
 Currently, the following table lists the included examples:
 
-| # | Example                                               | Language | Description                                                                              |
-|---|-------------------------------------------------------|----------|------------------------------------------------------------------------------------------|
-| 1 | [GraphRAG Pipeline](rust/graphrag-agent)              | Rust     | Knowledge graph extraction and retrieval-augmented generation using an LLM.              |
-| 2 | [Codebase Explorer](rust/code-explorer)               | Rust     | Syntax dependency graph constructor and function ranking using PageRank.                 |
-| 3 | [Fraud Detection System](python/fraud)                | Python   | Real-time financial transaction stream analyzer using Cypher queries.                    |
-| 4 | [Social Recommendation System](python/recommendation) | Python   | Hybrid friend and content recommender using collaborative filtering and semantic search. |
+| # | Example                                               | Language | Description                                                                                       |
+|---|-------------------------------------------------------|----------|---------------------------------------------------------------------------------------------------|
+| 1 | [GraphRAG Pipeline](rust/graphrag-agent)              | Rust     | Knowledge graph extraction and retrieval-augmented generation using an LLM.                       |
+| 2 | [Codebase Explorer](rust/code-explorer)               | Rust     | Syntax dependency graph constructor and function ranking using PageRank.                          |
+| 3 | [Fraud Detection System](python/fraud)                | Python   | Real-time financial transaction stream analyzer using Cypher queries.                             |
+| 4 | [Social Recommendation System](python/recommendation) | Python   | Hybrid friend and content recommender using graph traversal, vector search, and hybrid retrieval. |
 
 ---
 
@@ -51,7 +51,7 @@ To build and run the example applications, you need:
 
 #### Running the Demos
 
-You can run any of the demos using the provided `Makefile` targets:
+You can run any of the demos using the provided [`Makefile`](Makefile) targets:
 
 - Run the GraphRAG pipeline:
   ```bash

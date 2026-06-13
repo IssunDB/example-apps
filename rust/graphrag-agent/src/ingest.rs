@@ -170,11 +170,10 @@ fn chunk(text: &str) -> Vec<String> {
             current.push_str("\n\n");
         }
         current.push_str(para);
-        // Hard-split oversized paragraphs on word boundaries.
+        // Hard-split oversized paragraphs, cutting only at UTF-8 char
+        // boundaries so multi-byte text never panics the slice.
         while current.len() > CHUNK_MAX {
-            let cut = current[..CHUNK_MAX]
-                .rfind(char::is_whitespace)
-                .unwrap_or(CHUNK_MAX);
+            let cut = split_point(&current);
             let rest = current.split_off(cut);
             chunks.push(std::mem::take(&mut current));
             current = rest.trim_start().to_owned();
@@ -184,6 +183,32 @@ fn chunk(text: &str) -> Vec<String> {
         chunks.push(current);
     }
     chunks
+}
+
+/// Byte index at or below `CHUNK_MAX` at which to split a too-long chunk.
+///
+/// Prefers the last whitespace boundary within the limit and always lands on a
+/// UTF-8 char boundary, so a chunk containing multi-byte characters cannot
+/// trigger a panic when sliced. The result is at least 1, so the split loop
+/// always makes progress.
+fn split_point(s: &str) -> usize {
+    if let Some((idx, _)) = s
+        .char_indices()
+        .take_while(|(i, _)| *i <= CHUNK_MAX)
+        .filter(|(_, c)| c.is_whitespace())
+        .last()
+    {
+        if idx > 0 {
+            return idx;
+        }
+    }
+    // No usable whitespace in range: fall back to the largest char boundary
+    // at or below the limit.
+    let mut cut = CHUNK_MAX;
+    while cut > 1 && !s.is_char_boundary(cut) {
+        cut -= 1;
+    }
+    cut
 }
 
 /// Heuristic named-entity extraction: runs of capitalized words.
@@ -257,5 +282,20 @@ mod tests {
         let chunks = chunk(text);
         assert_eq!(chunks.len(), 1);
         assert!(chunks[0].contains("para three"));
+    }
+
+    #[test]
+    fn chunking_splits_multibyte_text_without_panic() {
+        // A whitespace-free run of 3-byte characters: byte CHUNK_MAX lands
+        // mid-character, which a naive byte slice would panic on.
+        let text = "\u{4f60}".repeat(400); // 1200 bytes, 400 chars
+        let chunks = chunk(&text);
+        assert!(
+            chunks.len() > 1,
+            "expected a hard split, got {}",
+            chunks.len()
+        );
+        // No whitespace in the input, so the split is lossless.
+        assert_eq!(chunks.concat().chars().count(), 400);
     }
 }
