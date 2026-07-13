@@ -10,7 +10,7 @@ rust-version = "1.85.0"
 publish = false
 
 [workspace.dependencies]
-issundb = "0.1.0-alpha.11"
+issundb = "0.1.0-alpha.14"
 
 [profile.release]
 strip = "debuginfo"
