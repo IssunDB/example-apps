@@ -1042,9 +1042,9 @@ checksum = "a6cb138bb79a146c1bd460005623e142ef0181e3d0219cb493e02f7d08a35695"
 
 [[package]]
 name = "issundb"
-version = "0.1.0-alpha.15"
+version = "0.1.0-alpha.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d0d934cc839b57b234347bb41499712712008dcedfec9909ea7dbc1c3c2d22d1"
+checksum = "3a9ac6fd45fcc9e3155718b5d6a875cbaf0b5580ba9829f95fea64a5a9076959"
 dependencies = [
  "issundb-core",
  "issundb-cypher",
@@ -1056,9 +1056,9 @@ dependencies = [
 
 [[package]]
 name = "issundb-core"
-version = "0.1.0-alpha.15"
+version = "0.1.0-alpha.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b4c78fbbd6c7d0b40baccd7557815297c890b1bfc893121ef9fca5646616f0b2"
+checksum = "25ec4eaba9d66c1755ceb4ad873afdfaab69557f7295833a4109eb64d07f6616"
 dependencies = [
  "ahash",
  "arc-swap",
@@ -1079,9 +1079,9 @@ dependencies = [
 
 [[package]]
 name = "issundb-cypher"
-version = "0.1.0-alpha.15"
+version = "0.1.0-alpha.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "92217ea3c9bb268dbe0678b30128caf23cd91212a4890682d718c6ce7012415d"
+checksum = "7276e28f0d54593d3794b7254032822f4068cee0180bca4b1aae103b30a0686f"
 dependencies = [
  "ahash",
  "arrow-array",
@@ -1104,9 +1104,9 @@ dependencies = [
 
 [[package]]
 name = "issundb-graphblas"
-version = "0.1.0-alpha.15"
+version = "0.1.0-alpha.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fb401e4c8261fe3054f19042004eb5d55829828380f79fee4008cacd95a0958c"
+checksum = "e67db22840a23c113bdbba0021daa31fe08550389093477fb23b22e5a0f022fb"
 dependencies = [
  "issundb-graphblas-sys",
  "thiserror",
@@ -1114,9 +1114,9 @@ dependencies = [
 
 [[package]]
 name = "issundb-graphblas-sys"
-version = "0.1.0-alpha.15"
+version = "0.1.0-alpha.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f3094d084f6368f854407e5ee8926d470c97e72027b4c5cc11b521f5aad62763"
+checksum = "ef08ebe52108cf76557c9cd7523d37da964b33ebb37c667a5294af1bd8f814a4"
 dependencies = [
  "bindgen",
  "cmake",
@@ -1125,9 +1125,9 @@ dependencies = [
 
 [[package]]
 name = "issundb-retrieval"
-version = "0.1.0-alpha.15"
+version = "0.1.0-alpha.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "70bfd9466be266e781194fdfc364b8bedd363bc2eb01d118a3dca515bc9286de"
+checksum = "db22c1f04564675b03b30293e3571d539d351b3c89561a40811dafbfcdee5ec2"
 dependencies = [
  "ahash",
  "issundb-core",
@@ -1138,9 +1138,9 @@ dependencies = [
 
 [[package]]
 name = "issundb-text"
-version = "0.1.0-alpha.15"
+version = "0.1.0-alpha.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bfc27adbc5cae02190db7f83778035400a85723666c0e8ab35d41750872177a2"
+checksum = "4c51085e4bcb210f99441a11e883bcfcdde12f81f4db2fb27ffea75f289b4044"
 dependencies = [
  "issundb-core",
  "roaring",
@@ -1149,9 +1149,9 @@ dependencies = [
 
 [[package]]
 name = "issundb-vector"
-version = "0.1.0-alpha.15"
+version = "0.1.0-alpha.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c7cddf8244c069ab06cbefc86e4232817e2a6d057cbb9ff860daf8d949e3ceef"
+checksum = "0c5eccf0ce9661d0ffb17e4919a4c4d9f36df9889e4b8b59130c3fd26d7510f0"
 dependencies = [
  "issundb-core",
  "parking_lot",
