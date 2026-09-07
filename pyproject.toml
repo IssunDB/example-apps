@@ -7,7 +7,7 @@ requires-python = ">=3.10,<4.0"
 dependencies = [
     "maturin[zig]>=1.8.3",
     "numpy>=2.2.6",
-    "issundb>=0.1.0a28",
+    "issundb>=0.1.0a29",
 ]
 
 [project.optional-dependencies]

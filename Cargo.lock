@@ -928,9 +928,9 @@ checksum = "a6cb138bb79a146c1bd460005623e142ef0181e3d0219cb493e02f7d08a35695"
 
 [[package]]
 name = "issundb"
-version = "0.1.0-alpha.28"
+version = "0.1.0-alpha.29"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d91fefb0ade89492bbdc2996b0c03ac7236526fbbc222cd5d28b32559dc90298"
+checksum = "52e3c426e621975a5b933ea03fedfca9ca8f7f9399e0082bdb3d990d5798090b"
 dependencies = [
  "issundb-core",
  "issundb-cypher",
@@ -942,15 +942,16 @@ dependencies = [
 
 [[package]]
 name = "issundb-core"
-version = "0.1.0-alpha.28"
+version = "0.1.0-alpha.29"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e1aec95fa30a109a35676fd122129ac6f85fdb847623337790ccc260710d02c5"
+checksum = "af7adea816c8220eccba6260b0b3e74a90b7582070d08b34b93499df004a2a42"
 dependencies = [
  "ahash",
  "arc-swap",
  "byteorder",
  "deepsize",
  "heed",
+ "memmap2",
  "parking_lot",
  "rmp-serde",
  "rust-stemmers",
@@ -964,9 +965,9 @@ dependencies = [
 
 [[package]]
 name = "issundb-cypher"
-version = "0.1.0-alpha.28"
+version = "0.1.0-alpha.29"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "510f9fd61585e95ee58202d410f7a89116e2c60253c76c2b215054ded3758359"
+checksum = "03c4f6aca75c049d985acd62e46372fd40f549e6aefc70a9f91de09fb9b8e1a7"
 dependencies = [
  "ahash",
  "arrow-array",
@@ -989,9 +990,9 @@ dependencies = [
 
 [[package]]
 name = "issundb-retrieval"
-version = "0.1.0-alpha.28"
+version = "0.1.0-alpha.29"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "51b2f8c45119fe5b57964bd6ace4d9b9e0c6c61e0a3a756b8d646cce0d19c02f"
+checksum = "7d95d07a39b705cec9b3091dd066843387660de9cd97a5482a89ce3435e7622f"
 dependencies = [
  "ahash",
  "issundb-core",
@@ -1002,9 +1003,9 @@ dependencies = [
 
 [[package]]
 name = "issundb-text"
-version = "0.1.0-alpha.28"
+version = "0.1.0-alpha.29"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "13d5c768d791bed1f48266be930f88de139add3eac1b182b2c48ce685837e5c7"
+checksum = "97c425e4bfa634acfc20010beec86ef1698022e31159971cef77886760ace3dc"
 dependencies = [
  "issundb-core",
  "roaring",
@@ -1013,9 +1014,9 @@ dependencies = [
 
 [[package]]
 name = "issundb-vector"
-version = "0.1.0-alpha.28"
+version = "0.1.0-alpha.29"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a2a5186e6d4eab6756c1c03efcae2321d042aba406d4c86b54d5f26d1f7fd31d"
+checksum = "f7b473d61444f0f65a671a28c94941e1bb393888a27be8535c10cae7b8a6a123"
 dependencies = [
  "issundb-core",
  "parking_lot",
@@ -1119,6 +1120,15 @@ name = "memchr"
 version = "2.8.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "88904434abc2901f197fe8cc55f0445e7ded921dba5911dad2e2b39b48e663c4"
+
+[[package]]
+name = "memmap2"
+version = "0.9.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d1219ed1b7f229ee7104d281dd01d6802fe28bb6e95d292942c4daacdeb798c0"
+dependencies = [
+ "libc",
+]
 
 [[package]]
 name = "miniz_oxide"
