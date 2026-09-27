@@ -21,6 +21,7 @@ Priorities, in order:
 
 ## Writing Style
 
+- Write in simple, plain English. Prefer using short sentences and everyday words.
 - Use Oxford commas in inline lists: "a, b, and c" not "a, b, c".
 - Do not use em dashes. Restructure the sentence, or use a colon or semicolon instead.
 - Avoid colorful adjectives and adverbs. Write "instruction decoder" not "elegant instruction decoder".
