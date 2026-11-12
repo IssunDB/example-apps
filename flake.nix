@@ -10,7 +10,6 @@
       systems = [
         "x86_64-linux"
         "aarch64-linux"
-        "x86_64-darwin"
         "aarch64-darwin"
       ];
       forAllSystems = f:
@@ -28,7 +27,7 @@
             name = "example-apps-dev";
 
             packages = with pkgs; [
-              python313
+              python315
               uv
               gnumake
               cargo
